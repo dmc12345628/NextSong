@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Reunión Actual
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="_session.hasMeeting(); else seeMeetings">
+    <ion-card-header>
+      <ion-item>
+        <ion-avatar item-start>
+          <ion-icon name="people"></ion-icon>
+        </ion-avatar>
+        <h2>
+          {{ _session.meeting.actual.name }} - 
+          {{ _session.meeting.actual.autor }}
+        </h2>
+        <p>{{ _session.getMeetingDate().getStringDate() }}</p>
+      </ion-item>
+    </ion-card-header>
+  </ion-card>
+  <ng-template #seeMeetings>
+    <ion-card>
+      <ion-card-header>
+        <ion-item>
+          <h2>
+            ¡No te haz unido a ninguna reunión!
+          </h2>
+          <button ion-button block
+            (click)="seeMeeting()">
+            Ver reuniones
+          </button>
+        </ion-item>
+      </ion-card-header>
+    </ion-card>
+  </ng-template>
+</ion-content>

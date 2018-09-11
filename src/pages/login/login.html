@@ -1,0 +1,11 @@
+<ion-content class="login-form" padding text-center>
+  <ion-img width="128" height="128" src="assets/imgs/logo.png"></ion-img>
+  <ion-title>NextSong</ion-title>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input [(ngModel)]="nickname" type="text" value=""></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button block (click)="login()">Conectarse</button>
+</ion-content>

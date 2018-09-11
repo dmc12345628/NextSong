@@ -1,0 +1,7 @@
+{
+  "name": "NextSong",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

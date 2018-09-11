@@ -1,0 +1,26 @@
+<ion-menu [content]="mainNav">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>{{ _session.user.nickname }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button *ngIf="_session.user.nickname; else login"
+        ion-item
+        (click)="logout()"
+        menuClose>
+        Cerrar sessión
+      </button>
+      <ng-template #login>
+        <button
+          ion-item
+          (click)="showLoginDialog()">
+          Conectarse
+        </button>
+      </ng-template>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mainNav [root]="loginPage"></ion-nav>
