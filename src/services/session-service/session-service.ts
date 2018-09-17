@@ -54,28 +54,41 @@ export class SessionService {
       nickname: nickname
     })
       .then(() => {
-        this.user = {
-          active: true,
-          connected: newDate.getCompleteDateTime(),
-          meeting: '',
-          nickname: nickname
-        };
-
-        this.getDocUser().valueChanges().subscribe((user: User) => {
-          this.user = user;
-          
-          if (this.user.meeting) {
-            this._meeting.getDocMeeting(this.user.meeting).valueChanges().subscribe((meeting: Meeting) => {
-              this.meeting = meeting;
-            });
-          }
-        });
-        
-        thenCallback();
+        this.afterLogin(nickname, newDate, thenCallback);
       })
       .catch((error) => {
-        console.error("Error writing document: ", error);
+        this.afs.collection('users').doc(nickname).set({
+          active: true,
+          connected: newDate.getCompleteDate(),
+          meeting: '',
+          nickname: nickname
+        }).then(() => {
+          this.afterLogin(nickname, newDate, thenCallback);
+        }).catch((err) => {
+          console.log('Error writing document: ', err);
+        });
       });
+  }
+
+  afterLogin(nickname, newDate, thenCallback) {
+    this.user = {
+      active: true,
+      connected: newDate.getCompleteDateTime(),
+      meeting: '',
+      nickname: nickname
+    };
+
+    this.getDocUser().valueChanges().subscribe((user: User) => {
+      this.user = user;
+      
+      if (this.user.meeting) {
+        this._meeting.getDocMeeting(this.user.meeting).valueChanges().subscribe((meeting: Meeting) => {
+          this.meeting = meeting;
+        });
+      }
+    });
+    
+    thenCallback();
   }
 
   logout(thenCallback) {

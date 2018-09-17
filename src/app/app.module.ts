@@ -25,6 +25,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SongService } from '../services/song-service/song-service';
 import { MeetingService } from '../services/meeting-service/meeting-service';
 import { SessionService } from '../services/session-service/session-service';
+import { MessagingService } from '../services/messaging-service/messaging-service';
 
 var config = {
   apiKey: "AIzaSyClyMgidzPc3pV8VO5187AHR-9wEJt7LFk",
@@ -67,7 +68,8 @@ var config = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SongService,
     MeetingService,
-    SessionService
+    SessionService,
+    MessagingService,
   ]
 })
 export class AppModule {}
